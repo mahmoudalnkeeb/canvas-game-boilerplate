@@ -6,40 +6,22 @@ export default class Circle {
    * @param {string} color
    * @param {CanvasRenderingContext2D} c
    */
-  constructor(x, y, radius, color, c, container) {
+  constructor( x, y, radius, color, context ) {
     this.x = x;
     this.y = y;
     this.radius = radius;
     this.color = color;
-    this.c = c;
-    this.velocity = {
-      x: 0,
-      y: 0,
-    };
-    this.gravity = 0.3;
-    this.container = container;
-    this.ground = this.container.height - this.radius;
+    this.context = context;
   }
 
   draw() {
-    this.c.beginPath();
-    this.c.fillStyle = this.color;
-    this.c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-    this.c.fill();
-    this.c.closePath();
+    this.context.beginPath();
+    this.context.fillStyle = this.color;
+    this.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+    this.context.fill();
+    this.context.closePath();
   }
   update() {
-    this.applyGravity()
     this.draw();
-  }
-  applyGravity() {
-    this.velocity.y += this.gravity;
-    this.y += this.velocity.y;
-    this.checkGround();
-  }
-  checkGround() {
-    if (this.y > this.ground) {
-      this.y = this.ground;
-    }
   }
 }

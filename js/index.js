@@ -3,36 +3,29 @@ import Rect from './classes/Rect.js';
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
-let container = {
-  width: innerWidth,
-  height: innerHeight,
-};
-
 // responsive canvas
-canvas.width = container.width;
-canvas.height = container.height;
+canvas.width = 64 * 16;
+canvas.height = 64 * 9;
 
-let rect = new Rect({
-  x: container.width / 2,
-  y: 50,
-  w: 50,
-  h: 50,
-  container,
-  context,
-});
-
+let rect = new Rect(
+  canvas.width / 2,
+  canvas.height / 2,
+  50,
+  50,
+  'red',
+  context
+);
 let circle = new Circle(
-  container.width / 2 - 50,
-  75,
+  canvas.width / 2 - 50,
+  canvas.height / 2 + 25,
   25,
   'red',
-  context,
-  container
+  context
 );
 
 function animate() {
   requestAnimationFrame(animate);
-  context.clearRect(0, 0, container.width, container.height);
+  context.clearRect(0, 0, canvas.width, canvas.height);
   rect.update();
   circle.update();
 }
